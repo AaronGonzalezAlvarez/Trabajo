@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+<hibernate-mapping>
+	<class name="hibernate.Asignatura" table="asignatura"
+		catalog="universidad">
+		<id name="id" type="int">
+			<column name="id" />
+			<generator class="assigned" />
+		</id>
+		
+		<property name="nombre" type="string">
+			<column name="nombre" length="100" />
+		</property>
+		<property name="creditos" type="float">
+			<column name="creditos"  />
+		</property>
+		<property name="tipo" type="string">
+			<column name="tipo" length="100" />
+		</property>
+		<property name="curso" type="int">
+			<column name="curso" />
+		</property>
+		<property name="cuatrimestre" type="int">
+			<column name="cuatrimestre" />
+		</property>
+		
+		<many-to-one name="profesor" class="hibernate.Profesor" fetch="select">
+			<column name="id_profesor" not-null="true"></column>
+		</many-to-one>
+		
+		<many-to-one name="grado" class="hibernate.Grado" fetch="select">
+			<column name="id_grado" not-null="true"></column>
+		</many-to-one>
+		
+		<set fetch="select" inverse="true" lazy="true" name="alumnos" table="alumno_se_matricula_asignatura">
+            <key>
+                <column name="id_asignatura" not-null="true"/>
+            </key>
+            <one-to-many class="hibernate.AlumnoSeMatriculaAsignatura"/>
+        </set>
+		
+	</class>
+</hibernate-mapping>

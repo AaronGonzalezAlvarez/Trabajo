@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+<hibernate-mapping>
+	<class name="hibernate.Persona" table="persona"
+		catalog="universidad">
+		<id name="id" type="int">
+			<column name="id" />
+			<generator class="assigned" />
+		</id>
+		
+		<property name="nif" type="string">
+			<column name="nif" length="9" />
+		</property>		
+		<property name="nombre" type="string">
+			<column name="nombre" length="25" />
+		</property>	
+		<property name="apellido1" type="string">
+			<column name="apellido1" length="50" />
+		</property>	
+		<property name="apellido2" type="string">
+			<column name="apellido2" length="50" />
+		</property>	
+		<property name="ciudad" type="string">
+			<column name="ciudad" length="25" />
+		</property>	
+		<property name="direccion" type="string">
+			<column name="direccion" length="50" />
+		</property>	
+		<property name="telefono" type="string">
+			<column name="telefono" length="9" />
+		</property>	
+		
+		<property name="fecha_nacimiento" type="date">
+			<column name="fecha_nacimiento" />
+		</property>	
+		
+		<property name="sexo" type="string">
+			<column name="sexo" length="1" />
+		</property>	
+		
+		<property name="tipo" type="string">
+			<column name="tipo" length="50" />
+		</property>
+		
+		<one-to-one name="profesor" constrained="false" class="hibernate.Profesor" />
+		
+		<set fetch="select" inverse="true" lazy="true" name="asignaturas" table="alumno_se_matricula_asignatura">
+            <key>
+                <column name="id_alumno" not-null="true"/>
+            </key>
+            <one-to-many class="hibernate.AlumnoSeMatriculaAsignatura"/>
+        </set>
+		
+		
+	</class>
+</hibernate-mapping>
