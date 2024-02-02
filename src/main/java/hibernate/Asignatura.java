@@ -22,8 +22,7 @@ public class Asignatura implements Serializable{
 	
 	
 	
-	public Asignatura(int id, String nombre, float creditos, String tipo, int curso, int cuatrimestre) {
-		this.id = id;
+	public Asignatura(String nombre, float creditos, String tipo, int curso, int cuatrimestre) {
 		this.nombre = nombre;
 		this.creditos = creditos;
 		this.tipo = tipo;

@@ -10,9 +10,10 @@ import org.hibernate.query.Query;
 import Universidad.Trabajo.Hibernateconexion;
 import hibernate.Asignatura;
 import hibernate.Grado;
+import hibernate.Persona;
 import hibernate.Profesor;
 
-public class AsignaturaService {
+public class BaseDatosService {
 
 	private SessionFactory sf = Hibernateconexion.getSessionFactory();
 
@@ -87,18 +88,41 @@ public class AsignaturaService {
 //		return editores;
 //	}
 	
+	// ejercicio 4
+	
 	public void addAsignatura(int id_grado, Asignatura a,int profesor) {
 		Session session = sf.openSession();
 		Transaction tx1 = session.beginTransaction();
 		Grado grado = session.get(Grado.class, id_grado);
 		Profesor pr = session.get(Profesor.class, profesor);
 		a.setProfesor(pr);
-		var asignarutas = grado.getAsignaturas();
-		
-		asignarutas.add(a);
-		
-		session.merge(grado);
+		a.setGrado(grado);
+		session.persist(a);
 		tx1.commit();
 		session.close();
+	}
+	
+	// ejercicio 5
+	
+	public void updateTelefonoProfesor(int idProfesor, String telefono) {
+		Session session = sf.openSession();
+		Transaction tx1 = session.beginTransaction();
+		Profesor profesor = session.get(Profesor.class, idProfesor);
+		Persona datosProfesor = profesor.getPersona();
+		datosProfesor.setTelefono(telefono);
+		session.merge(profesor);
+		tx1.commit();
+		session.close();
+	}
+	
+	//ejercicio 6
+	
+	public void deleteGrado(int idGrado) {
+		Session session = sf.openSession();
+		Transaction tx1 = session.beginTransaction();
+		Grado grado = session.get(Grado.class, idGrado);
+		session.remove(grado);
+		tx1.commit();
+		session.close();		
 	}
 }
