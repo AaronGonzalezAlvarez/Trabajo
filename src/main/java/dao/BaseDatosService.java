@@ -1,5 +1,6 @@
 package dao;
 
+import java.math.BigInteger;
 import java.util.List;
 
 import org.hibernate.Session;
@@ -112,6 +113,39 @@ public class BaseDatosService {
 	        int idProfesor = (int) resultado[0];
 	        Long nif = (Long) resultado[1];
 	        System.out.println("ID Profesor: " + idProfesor + ", Total asignaturas: " + nif);
+	    }
+		session.close();
+	}
+	
+	//ejercicio 3
+	
+	public void TotalAsignarurasProfesorSQL() {
+	    // Consulta SQL nativa
+	    String sql = "SELECT pro.id_profesor, COUNT(*) " +
+	                 "FROM profesor pro " +
+	                 "INNER JOIN asignatura ai ON pro.id_profesor = ai.id_profesor " +
+	                 "GROUP BY pro.id_profesor";
+
+	    Session session = sf.openSession();
+	    List<Object[]> resultados = session.createNativeQuery(sql, Object[].class).list();
+
+	    for (Object[] resultado : resultados) {
+	        int idProfesor = (int) resultado[0];
+	        Long totalAsignaturas = (Long) resultado[1]; // Utiliza BigInteger para COUNT en SQL
+	        System.out.println("ID Profesor: " + idProfesor + ", Total asignaturas: " + totalAsignaturas);
+	    }
+
+	    session.close();
+	}
+	
+	public void DatosPersonalesSQL() {
+		Session session = sf.openSession();
+		String hql = "SELECT p.id_profesor, per.nif FROM Profesor p INNER JOIN persona per ON p.id_profesor = per.id";
+	    List<Object[]> resultados = session.createQuery(hql, Object[].class).list();
+	    for (Object[] resultado : resultados) {
+	        int idProfesor = (int) resultado[0];
+	        String nif = (String) resultado[1];
+	        System.out.println("ID Profesor: " + idProfesor + ", NIF: " + nif);
 	    }
 		session.close();
 	}

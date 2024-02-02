@@ -20,6 +20,8 @@ public class App
     	
     	service.DatosPersonalesHQL();
     	service.TotalAsignarurasProfesor();
+    	service.TotalAsignarurasProfesorSQL();
+    	service.DatosPersonalesSQL();
     	
 //    	//ejercicio4
 //    	Asignatura a = new Asignatura("Prueba 33", 4, "TipoPrueba",2,1);
