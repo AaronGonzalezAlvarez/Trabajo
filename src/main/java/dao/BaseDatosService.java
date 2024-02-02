@@ -103,6 +103,19 @@ public class BaseDatosService {
 		session.close();
 	}
 	
+	public void TotalAsignarurasProfesor() {
+		//SELECT pro.id_profesor ,COUNT(*) FROM profesor pro INNER JOIN asignatura ai ON pro.id_profesor = ai.id_profesor group BY pro.id_profesor;
+		Session session = sf.openSession();
+		String hql = "SELECT p.id_profesor , COUNT(a) FROM Profesor p JOIN p.asignaturas a GROUP BY p.id_profesor";
+	    List<Object[]> resultados = session.createQuery(hql, Object[].class).list();
+	    for (Object[] resultado : resultados) {
+	        int idProfesor = (int) resultado[0];
+	        Long nif = (Long) resultado[1];
+	        System.out.println("ID Profesor: " + idProfesor + ", Total asignaturas: " + nif);
+	    }
+		session.close();
+	}
+	
 	// ejercicio 4
 	
 	public void addAsignatura(int id_grado, Asignatura a,int profesor) {
