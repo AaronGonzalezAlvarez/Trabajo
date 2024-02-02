@@ -88,6 +88,21 @@ public class BaseDatosService {
 //		return editores;
 //	}
 	
+	
+	
+	//ejercicio 2
+	public void DatosPersonalesHQL() {
+		Session session = sf.openSession();
+		String hql = "SELECT p.id_profesor, n.nif FROM Profesor p JOIN p.persona n";
+	    List<Object[]> resultados = session.createQuery(hql, Object[].class).list();
+	    for (Object[] resultado : resultados) {
+	        int idProfesor = (int) resultado[0];
+	        String nif = (String) resultado[1];
+	        System.out.println("ID Profesor: " + idProfesor + ", NIF: " + nif);
+	    }
+		session.close();
+	}
+	
 	// ejercicio 4
 	
 	public void addAsignatura(int id_grado, Asignatura a,int profesor) {
