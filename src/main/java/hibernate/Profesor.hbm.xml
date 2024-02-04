@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+<hibernate-mapping>
+	<class name="hibernate.Profesor" table="profesor"
+		catalog="universidad">
+		<id name="id_profesor" type="int">
+			<column name="id_profesor" />
+			<generator class="assigned" />
+		</id>
+			
+		<property name="nombre" type="string">
+			<column name="nombre" length="45" />
+		</property>
+		
+		<many-to-one name="departamento" class="hibernate.Departamento" fetch="select">
+			<column name="id_departamento" not-null="true"></column>
+		</many-to-one>
+		
+		<set name="asignaturas" table="asignatura" inverse="true" lazy="true" fetch="select">
+			<key>
+				<column name="id_profesor"></column>
+			</key>
+			<one-to-many class="hibernate.Asignatura"/>
+		</set>
+		
+		<one-to-one name="persona" constrained="false" class="hibernate.Persona" />
+		
+	</class>
+</hibernate-mapping>
