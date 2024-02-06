@@ -579,9 +579,9 @@ public class BaseDatosService {
 		Persona persona = new Persona("21153608C","Aaron","Gonzalez","Alvarez","Sevilla","C/la mia","695211425",fechaActual,"H","alumno");
 		session.persist(persona);
 		//tx1.commit();
-		
+		System.out.println(persona.toString());
 		//conseguir id persona
-		String hql = "SELECT p from Persona p where p.nif = :nif";
+		/*String hql = "SELECT p from Persona p where p.nif = :nif";
 		Query<Object[]> query = session.createQuery(hql,Object[].class);
 		query.setParameter("nif","21153608C");
 		List<Object[]> results = query.list();
@@ -589,10 +589,10 @@ public class BaseDatosService {
 	    for (Object[] resultado : results) {
 	    	idPErsona = (Persona) resultado[0];
 	        
-	    }		
+	    }	*/	
 		AlumnoSeMatriculaAsignatura nueva = new AlumnoSeMatriculaAsignatura();
 		AlumnoSeMatriculaAsignaturaId id = new AlumnoSeMatriculaAsignaturaId();
-		id.setIdAlumno(idPErsona.getId());
+		id.setIdAlumno(persona.getId());
 		id.setIdAsignatura(24);
 		id.setIdCursoEscolar(5);
 		nueva.setId(id);

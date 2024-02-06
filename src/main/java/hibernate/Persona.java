@@ -3,6 +3,7 @@ package hibernate;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
 public class Persona implements Serializable{
@@ -198,6 +199,35 @@ public class Persona implements Serializable{
 		
 		return data;
 	}
+
+
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(apellido1, apellido2, asignaturas, ciudad, direccion, fecha_nacimiento, id, nif, nombre,
+				profesor, sexo, telefono, tipo);
+	}
+
+
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Persona other = (Persona) obj;
+		return Objects.equals(apellido1, other.apellido1) && Objects.equals(apellido2, other.apellido2)
+				&& Objects.equals(asignaturas, other.asignaturas) && Objects.equals(ciudad, other.ciudad)
+				&& Objects.equals(direccion, other.direccion)
+				&& Objects.equals(fecha_nacimiento, other.fecha_nacimiento) && id == other.id
+				&& Objects.equals(nif, other.nif) && Objects.equals(nombre, other.nombre)
+				&& Objects.equals(profesor, other.profesor) && Objects.equals(sexo, other.sexo)
+				&& Objects.equals(telefono, other.telefono) && Objects.equals(tipo, other.tipo);
+	}
+	
 	
 	
 	
