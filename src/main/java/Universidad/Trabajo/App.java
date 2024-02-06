@@ -56,11 +56,11 @@ public class App
     	//service.getAlumnoProfesorAsignatura();
 
     	//
-    	//service.addPersonaAsignatura();
+    	service.addPersonaAsignatura();
     	
     	//service.addAsignaturaAlumno(34);
     	//service.borrarAsignaturaAlumno(34, 24, 5);
-    	service.updateCretiosPorGrado(4);
+    	//service.updateCretiosPorGrado(4);
     	
     }
 }

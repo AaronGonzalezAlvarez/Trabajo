@@ -589,15 +589,15 @@ public class BaseDatosService {
 	    for (Object[] resultado : results) {
 	    	idPErsona = (Persona) resultado[0];
 	        
-	    }
-		
+	    }		
 		AlumnoSeMatriculaAsignatura nueva = new AlumnoSeMatriculaAsignatura();
 		AlumnoSeMatriculaAsignaturaId id = new AlumnoSeMatriculaAsignaturaId();
 		id.setIdAlumno(idPErsona.getId());
 		id.setIdAsignatura(24);
 		id.setIdCursoEscolar(5);
 		nueva.setId(id);
-		session.persist(nueva);
+		persona.getAsignaturas().add(nueva);
+		session.merge(persona);
 		tx1.commit();
 		session.close();
 	}

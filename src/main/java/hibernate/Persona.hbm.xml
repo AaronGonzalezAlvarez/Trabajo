@@ -44,7 +44,7 @@
 		
 		<one-to-one name="profesor" constrained="false" class="hibernate.Profesor" />
 		
-		<set fetch="select" inverse="true" lazy="true" name="asignaturas" table="alumno_se_matricula_asignatura">
+		<set fetch="select" inverse="true" lazy="true" name="asignaturas" table="alumno_se_matricula_asignatura" cascade="all">
             <key>
                 <column name="id_alumno" not-null="true"/>
             </key>
