@@ -18,10 +18,10 @@ public class App
     	
 
     	
-    	service.DatosPersonalesHQL();
-    	service.TotalAsignarurasProfesor();
-    	service.TotalAsignarurasProfesorSQL();
-    	service.DatosPersonalesSQL();
+    	//service.DatosPersonalesHQL();
+    	//service.TotalAsignarurasProfesor();
+    	//service.TotalAsignarurasProfesorSQL();
+    	//service.DatosPersonalesSQL();
     	
 //    	//ejercicio4
 //    	Asignatura a = new Asignatura("Prueba 33", 4, "TipoPrueba",2,1);
@@ -53,7 +53,14 @@ public class App
     	//service.asignatiraGradoYProfesor();
     	//service.cursoEscolaYAlumnosPorCurso();
     	//service.asignaturasDeCadaPersona();
-    	service.getAlumnoProfesorAsignatura();
+    	//service.getAlumnoProfesorAsignatura();
+
+    	//
+    	//service.addPersonaAsignatura();
+    	
+    	//service.addAsignaturaAlumno(34);
+    	//service.borrarAsignaturaAlumno(34, 24, 5);
+    	service.updateCretiosPorGrado(4);
     	
     }
 }

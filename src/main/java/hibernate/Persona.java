@@ -19,8 +19,29 @@ public class Persona implements Serializable{
 	String sexo;
 	String tipo;
 	Profesor profesor;
-	Set<AlumnoSeMatriculaAsignatura> asignaturas = new HashSet<AlumnoSeMatriculaAsignatura>(0);		
+	Set<AlumnoSeMatriculaAsignatura> asignaturas = new HashSet<AlumnoSeMatriculaAsignatura>(0);	
 	
+	public Persona() {
+		
+	}
+	
+	
+	
+	public Persona(String nif, String nombre, String apellido1, String apellido2, String ciudad, String direccion,
+			String telefono, Date fecha_nacimiento, String sexo, String tipo) {
+		this.nif = nif;
+		this.nombre = nombre;
+		this.apellido1 = apellido1;
+		this.apellido2 = apellido2;
+		this.ciudad = ciudad;
+		this.direccion = direccion;
+		this.telefono = telefono;
+		this.fecha_nacimiento = fecha_nacimiento;
+		this.sexo = sexo;
+		this.tipo = tipo;
+	}
+
+
 	public int getId() {
 		return id;
 	}

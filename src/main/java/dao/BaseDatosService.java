@@ -1,7 +1,12 @@
 package dao;
 
 import java.math.BigInteger;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -367,6 +372,7 @@ public class BaseDatosService {
 		Session session = sf.openSession();
 		String hql = "SELECT gr,asi,pr FROM Grado gr LEFT JOIN gr.asignaturas asi LEFT JOIN asi.profesor pr";
 	    List<Object[]> resultados = session.createQuery(hql, Object[].class).list();
+	    //session.close();
 	    for (Object[] resultado : resultados) {
 	    	Grado grado = (Grado) resultado[0];
 	    	Asignatura asignatura = (Asignatura) resultado[1];
@@ -563,4 +569,124 @@ public class BaseDatosService {
 		tx1.commit();
 		session.close();
 	}
+	
+	
+	//crear persona y asignarle asignatura
+	public void addPersonaAsignatura() {
+		Session session = sf.openSession();
+		Transaction tx1 = session.beginTransaction();
+		Date fechaActual = new Date();
+		Persona persona = new Persona("21153608C","Aaron","Gonzalez","Alvarez","Sevilla","C/la mia","695211425",fechaActual,"H","alumno");
+		session.persist(persona);
+		//tx1.commit();
+		
+		//conseguir id persona
+		String hql = "SELECT p from Persona p where p.nif = :nif";
+		Query<Object[]> query = session.createQuery(hql,Object[].class);
+		query.setParameter("nif","21153608C");
+		List<Object[]> results = query.list();
+		Persona idPErsona = null;
+	    for (Object[] resultado : results) {
+	    	idPErsona = (Persona) resultado[0];
+	        
+	    }
+		
+		AlumnoSeMatriculaAsignatura nueva = new AlumnoSeMatriculaAsignatura();
+		AlumnoSeMatriculaAsignaturaId id = new AlumnoSeMatriculaAsignaturaId();
+		id.setIdAlumno(idPErsona.getId());
+		id.setIdAsignatura(24);
+		id.setIdCursoEscolar(5);
+		nueva.setId(id);
+		session.persist(nueva);
+		tx1.commit();
+		session.close();
+	}
+	
+	//buscar alumno y añadir asignatura
+	public void addAsignaturaAlumno(int idAlumno) {
+		Session session = sf.openSession();
+		Transaction tx1 = session.beginTransaction();
+		//tx1.commit();
+		
+		//conseguir id persona
+		String hql = "SELECT p from Persona p where p.id = :id";
+		Query<Object[]> query = session.createQuery(hql,Object[].class);
+		query.setParameter("id",idAlumno);
+		List<Object[]> results = query.list();
+		Persona alumno = null;
+	    for (Object[] resultado : results) {
+	    	alumno = (Persona) resultado[0];
+	        
+	    }
+	    
+	    Set<AlumnoSeMatriculaAsignatura> asignaturas = alumno.getAsignaturas();
+	    AlumnoSeMatriculaAsignatura nueva = new AlumnoSeMatriculaAsignatura();
+		AlumnoSeMatriculaAsignaturaId id = new AlumnoSeMatriculaAsignaturaId();
+		id.setIdAlumno(alumno.getId());
+		id.setIdAsignatura(28);
+		id.setIdCursoEscolar(5);
+		nueva.setId(id);	
+		session.persist(nueva);
+		asignaturas.add(nueva);
+		session.merge(alumno);
+		tx1.commit();
+		session.close();
+	}
+	
+	
+	public void borrarAsignaturaAlumno(int idAlumno,int idAsignatura, int idCursoEscolar) {
+		Session session = sf.openSession();
+		Transaction tx1 = session.beginTransaction();
+		//tx1.commit();
+		
+		//conseguir id persona
+		String hql = "SELECT p from Persona p where p.id = :id";
+		Query<Object[]> query = session.createQuery(hql,Object[].class);
+		query.setParameter("id",idAlumno);
+		List<Object[]> results = query.list();
+		Persona alumno = null;
+	    for (Object[] resultado : results) {
+	    	alumno = (Persona) resultado[0];
+	        
+	    }
+	    
+	    Set<AlumnoSeMatriculaAsignatura> asignaturas = alumno.getAsignaturas();
+	    
+	    for(AlumnoSeMatriculaAsignatura x: asignaturas) {
+	    	if(x.getId().getIdAsignatura() == idAsignatura && x.getId().getIdCursoEscolar() == idCursoEscolar) {
+	    		session.remove(x);
+	    	}
+	    }
+		tx1.commit();
+		session.close();	    
+	}
+
+	public void updateCretiosPorGrado(int idGrado) {
+		Session session = sf.openSession();
+		Transaction tx1 = session.beginTransaction();
+		//conseguir id persona
+		String hql = "SELECT g from Grado g where g.id = :id";
+		Query<Object[]> query = session.createQuery(hql,Object[].class);
+		query.setParameter("id",idGrado);
+		List<Object[]> results = query.list();
+		Grado grado = null;
+	    for (Object[] resultado : results) {
+	    	grado = (Grado) resultado[0];
+	        
+	    }
+	    
+	    Set<Asignatura> asignaturas = grado.getAsignaturas();
+	    
+	    for(Asignatura x: asignaturas) {
+	    	if(x.getCreditos() >5) {
+	    		x.setCreditos(10);
+	    		session.merge(x);
+	    	}
+	    }
+		tx1.commit();
+		session.close();
+	}
+	
+	
+	
 }
