@@ -91,9 +91,19 @@ public class Asignatura implements Serializable{
 	
 	@Override
 	public String toString() {
-		return "Asignatura [id=" + id + ", nombre=" + nombre + ", creditos=" + creditos + ", tipo=" + tipo + ", curso="
-				+ curso + ", cuatrimestre=" + cuatrimestre + ", profesor=" + profesor.getNombre() + ", grado= " +grado.getNombre()+
-				" alumnos = "+ alumnos.size()+"]";
+		String string= "";
+		if(getProfesor() == null) {
+			string ="Asignatura [id=" + id + ", nombre=" + nombre + ", creditos=" + creditos + ", tipo=" + tipo + ", curso="
+					+ curso + ", cuatrimestre=" + cuatrimestre + ", grado= " +grado.getNombre()+
+					" alumnos = "+ alumnos.size()+"]";
+			
+		}else {
+			string ="Asignatura [id=" + id + ", nombre=" + nombre + ", creditos=" + creditos + ", tipo=" + tipo + ", curso="
+					+ curso + ", cuatrimestre=" + cuatrimestre + ", profesor=" + profesor.getNombre() + ", grado= " +grado.getNombre()+
+					" alumnos = "+ alumnos.size()+"]";
+			
+		}
+		return string;
 	}
 	
 	

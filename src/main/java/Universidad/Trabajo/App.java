@@ -17,50 +17,37 @@ public class App
     	BaseDatosService service = new BaseDatosService();
     	
 
+    	//ejercicio 1
+    	//grado
+    	service.mostrarGrados();
+    	//curso_escola
+    	service.mostrarCursoEscolar();
+//    	asignatura
+    	service.mostraAsginaturas();
+//    	profesor
+    	service.mostraProfesor();    	
+//    	departamento
+    	service.mostraDepartamento();  
+//    	persona
+    	service.mostraPeople();  
+//    	alumno_asignatura
+    	service.mostraPeopleAsignatura();
     	
-    	//service.DatosPersonalesHQL();
-    	//service.TotalAsignarurasProfesor();
-    	//service.TotalAsignarurasProfesorSQL();
-    	//service.DatosPersonalesSQL();
+    	//ejercicio2
+    	service.DatosPersonalesHQL();
+    	service.TotalAsignarurasProfesor();
+    	//ejercicio3
+    	service.TotalAsignarurasProfesorSQL();
+    	service.DatosPersonalesSQL();
     	
 //    	//ejercicio4
-//    	Asignatura a = new Asignatura("Prueba 33", 4, "TipoPrueba",2,1);
-//    	service.addAsignatura(4, a,5);
-//    	
+    	Asignatura a = new Asignatura("Prueba 23", 4, "TipoPrueba",2,1);
+    	service.addAsignatura(4, a,5);
+   	
 //    	//ejercicio5
-//    	service.updateTelefonoProfesor(3, "999999999");
-//    	
+    	service.updateTelefonoProfesor(3, "999999999");
+    	
 //    	//ejercicio7
-//    	service.deleteGrado(7);
-    	
-    	
-    	
-
-    	//añadir nuevo alumno a asignatura curso escolar
-    	//service.addAlumnoMatriculaAsignatura(24, 20, 5);
-    	//pruebas    	
-    	//service.CantidadAsignaturasPorAlumno();
-    	//service.totalAlumnosPorAsignatura();
-    	//service.totalAlumnosPorAsignaturaEnConcreto("Física para informática");
-    	//service.asignaturaQueDaCadaProfesor();
-    	//service.asignaturaQueDaCadaProfesorPorIdProfesor(3);
-    	//service.profesoresPorGenero("M");
-    	//service.asignaturaQueDaCadaProfesorPorGenero("H");
-    	//service.totalAsignaturaPorDepartamento();
-    	//service.AsignaturaPorDepartamento();
-    	//service.totalGeneroPorDepartamento();
-    	//service.creditostotalesPorGrado();
-    	//service.asignatiraGradoYProfesor();
-    	//service.cursoEscolaYAlumnosPorCurso();
-    	//service.asignaturasDeCadaPersona();
-    	//service.getAlumnoProfesorAsignatura();
-
-    	//
-    	service.addPersonaAsignatura();
-    	
-    	//service.addAsignaturaAlumno(34);
-    	//service.borrarAsignaturaAlumno(34, 24, 5);
-    	//service.updateCretiosPorGrado(4);
-    	
+    	service.deleteGrado(7);
     }
 }
